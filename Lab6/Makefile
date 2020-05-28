@@ -1,5 +1,3 @@
-OPENSSLLIB = -L/usr/local/opt/openssl@1.1/lib
-
 lab6: DiffieHellmanKeyGenerator.o main.o
 	gcc DiffieHellmanKeyGenerator.o main.o -o lab6 -lstdc++ -lssl -lcrypto -std=c++0x
 DiffieHellmanKeyGenerator.o: DiffieHellmanKeyGenerator.cpp DiffieHellmanKeyGenerator.h
