@@ -1,5 +1,6 @@
 #include "DiffieHellmanKeyGenerator.h"
 #include <openssl/x509.h>
+#include <openssl/evp.h>
 #include <openssl/ec.h>
 #include <openssl/err.h>
 
