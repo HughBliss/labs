@@ -9,7 +9,11 @@ DiffieHellmanKeyGenerator::DiffieHellmanKeyGenerator()
 {
 }
 
-//generate key. key will be returned (for move to recipient) and stored in class member 'pkey' for deriving
+/**
+ * Сгенерировать ключ
+ * Ключ также будет зафиксирован в объекте класса в поле pkey
+ * @return Ключ
+*/
 EVP_PKEY *DiffieHellmanKeyGenerator::generate()
 {
     EVP_PKEY_CTX *pctx, *kctx;
@@ -48,7 +52,11 @@ EVP_PKEY *DiffieHellmanKeyGenerator::generate()
     return pkey;
 }
 
-//derive shared secret. peerkey - key of other participant
+/**
+ * Вывести общий секретный ключ
+ * @param peerkey ключ другого участника
+ * @return общий секретный ключ
+*/
 std::string DiffieHellmanKeyGenerator::derive(EVP_PKEY *peerkey)
 {
     EVP_PKEY_CTX *ctx;
@@ -79,14 +87,16 @@ std::string DiffieHellmanKeyGenerator::derive(EVP_PKEY *peerkey)
     if (1 != (EVP_PKEY_derive(ctx, secret, &secret_len)))
         handleErrors();
 
-    const std::string retVal = std::string(secret, secret + secret_len / sizeof(unsigned char));
+    const std::string result = std::string(secret, secret + secret_len / sizeof(unsigned char));
     OPENSSL_free(secret);
     EVP_PKEY_CTX_free(ctx);
 
-    return retVal;
+    return result;
 }
 
-//print last error info and abort. called if some openssl function returned not 1 (not success)
+/**
+ * Вывести ошибку. Вызывается, если функция OpenSSL вернет не 1
+*/
 void DiffieHellmanKeyGenerator::handleErrors()
 {
     ERR_print_errors_fp(stderr);
