@@ -85,7 +85,7 @@ const char *verifyMessage(unsigned char *source, unsigned char *key, unsigned ch
 int main() {
     unsigned char key[KEY_SIZE];
     RAND_bytes(key, KEY_SIZE);
-    unsigned char *message = (unsigned char *)"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore molestiae quibusdam eveniet sapiente reiciendis eum",
+    unsigned char *message = (unsigned char *)"Artur Maxyutov",
                   *tag = encryptMessage(message, key),
                   *message2 = generateMessage(message, tag);
 
